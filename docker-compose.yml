@@ -34,7 +34,7 @@ services:
 
   mongodb:
     image: mongo:latest
-    container_name: meteo-mongo
+    container_name: test_mongo
     restart: unless-stopped
     ports:
       - "27017:27017"
@@ -44,7 +44,7 @@ services:
       - ./docker/env/mongo.env
     #command: [--auth]
     networks:
-      - meteo_network
+      - test_network
 
   phpmyadmin:
     image: phpmyadmin:latest
