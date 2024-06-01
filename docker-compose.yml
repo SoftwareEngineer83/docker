@@ -32,6 +32,20 @@ services:
     networks:
       - test_network
 
+  mongodb:
+    image: mongo:latest
+    container_name: meteo-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - data_mongo:/data/db
+    env_file:
+      - ./docker/env/mongo.env
+    #command: [--auth]
+    networks:
+      - meteo_network
+
   phpmyadmin:
     image: phpmyadmin:latest
     container_name: test_phpmyadmin
@@ -63,3 +77,11 @@ services:
 networks:
   test_network:
     driver: bridge
+
+volumes:
+    data_mongo:
+        driver: local
+        driver_opts:
+            o: bind
+            type: none
+            device: ./data/mongo
